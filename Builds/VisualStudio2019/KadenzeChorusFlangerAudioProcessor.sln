@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2019
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KadenzeChorusFlangerAudioProcessor - Standalone Plugin", "KadenzeChorusFlangerAudioProcessor_StandalonePlugin.vcxproj", "{15EA6BA2-E062-1A98-A639-7DB266FF5B7D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF} = {53BF077D-02BD-423C-A780-1F5C37C3D8AF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KadenzeChorusFlangerAudioProcessor - VST3", "KadenzeChorusFlangerAudioProcessor_VST3.vcxproj", "{6074AF99-2C07-3C88-555E-C22A8D4DA8A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF} = {53BF077D-02BD-423C-A780-1F5C37C3D8AF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KadenzeChorusFlangerAudioProcessor - Shared Code", "KadenzeChorusFlangerAudioProcessor_SharedCode.vcxproj", "{53BF077D-02BD-423C-A780-1F5C37C3D8AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6074AF99-2C07-3C88-555E-C22A8D4DA8A9}.Debug|x64.ActiveCfg = Debug|x64
+		{6074AF99-2C07-3C88-555E-C22A8D4DA8A9}.Debug|x64.Build.0 = Debug|x64
+		{6074AF99-2C07-3C88-555E-C22A8D4DA8A9}.Release|x64.ActiveCfg = Release|x64
+		{6074AF99-2C07-3C88-555E-C22A8D4DA8A9}.Release|x64.Build.0 = Release|x64
+		{15EA6BA2-E062-1A98-A639-7DB266FF5B7D}.Debug|x64.ActiveCfg = Debug|x64
+		{15EA6BA2-E062-1A98-A639-7DB266FF5B7D}.Debug|x64.Build.0 = Debug|x64
+		{15EA6BA2-E062-1A98-A639-7DB266FF5B7D}.Release|x64.ActiveCfg = Release|x64
+		{15EA6BA2-E062-1A98-A639-7DB266FF5B7D}.Release|x64.Build.0 = Release|x64
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF}.Debug|x64.ActiveCfg = Debug|x64
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF}.Debug|x64.Build.0 = Debug|x64
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF}.Release|x64.ActiveCfg = Release|x64
+		{53BF077D-02BD-423C-A780-1F5C37C3D8AF}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
