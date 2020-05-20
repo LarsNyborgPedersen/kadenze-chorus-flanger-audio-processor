@@ -40,7 +40,7 @@ KadenzaPluginDelayAudioProcessor::KadenzaPluginDelayAudioProcessor()
     addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0, 1, 0.5));
     addParameter(mRateParameter = new AudioParameterFloat("rate", "Rate", 0.1f, 20.f, 10.f));
     addParameter(mPhaseOffsetParameter = new AudioParameterFloat("phaseoffset", "Phase Offset", 0.0f, 1.f, 0.f));
-    addParameter(mFeedbackParameter = new AudioParameterFloat("feedback", "Feedback", 0, 0.98, 0.5));
+    addParameter(mFeedbackParameter = new AudioParameterFloat("feedback", "Feedback", 0, 0.98, 0.6));
     addParameter(mTypeParameter = new AudioParameterInt("type", "Type", 0, 1, 0));
 
     mDelayTimeSmoothed = 0;
@@ -229,6 +229,9 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
         }
 
         float lfoOutMapped = jmap(lfoOut, -1.0f, 1.0f, 0.005f, 0.03f);
+
+        outfile << std::to_string(*mFeedbackParameter) << std::endl;
+
 
         /*if (leftChannel[i] > highest) {
             highest = leftChannel[i];
