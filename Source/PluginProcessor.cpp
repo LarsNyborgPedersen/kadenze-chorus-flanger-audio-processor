@@ -36,11 +36,11 @@ KadenzaPluginDelayAudioProcessor::KadenzaPluginDelayAudioProcessor()
 
 
 
-    addParameter(mDryWetParameter = new AudioParameterFloat("drywet", "Dry Wet", 0, 1, 0.5));
-    addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0, 1, 0.5));
+    addParameter(mDryWetParameter = new AudioParameterFloat("drywet", "Dry Wet", 0.0, 1.0, 0.5));
+    addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0.0, 1.0, 0.5));
     addParameter(mRateParameter = new AudioParameterFloat("rate", "Rate", 0.1f, 20.f, 10.f));
     addParameter(mPhaseOffsetParameter = new AudioParameterFloat("phaseoffset", "Phase Offset", 0.0f, 1.f, 0.f));
-    addParameter(mFeedbackParameter = new AudioParameterFloat("feedback", "Feedback", 0, 0.98, 0.6));
+    addParameter(mFeedbackParameter = new AudioParameterFloat("feedback", "Feedback", 0.0, 0.98, 0.5));
     addParameter(mTypeParameter = new AudioParameterInt("type", "Type", 0, 1, 0));
 
     mDelayTimeSmoothed = 0;
@@ -222,7 +222,7 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
 
         float lfoOut = sin(2 * M_PI * mLFOPhase);
 
-        mLFOPhase = *mRateParameter * getSampleRate();
+        mLFOPhase += *mRateParameter * getSampleRate();
 
         if (mLFOPhase > 1) {
             mLFOPhase -= 1;

@@ -20,7 +20,7 @@ KadenzaPluginDelayAudioProcessorEditor::KadenzaPluginDelayAudioProcessorEditor(K
     setSize(400, 300);
 
     auto& params = processor.getParameters();
-
+    ///////////////////////////////////////////////////////////////////////////////////
     AudioParameterFloat* dryWetParameter = (AudioParameterFloat*)params.getUnchecked(0);
 
 
@@ -35,9 +35,56 @@ KadenzaPluginDelayAudioProcessorEditor::KadenzaPluginDelayAudioProcessorEditor(K
     mDryWetSlider.onDragStart = [dryWetParameter] {dryWetParameter->beginChangeGesture();};
     mDryWetSlider.onDragEnd = [dryWetParameter] {dryWetParameter->endChangeGesture();};
 
-    AudioParameterFloat* feedbackParameter = (AudioParameterFloat*)params.getUnchecked(1);
+    ///////////////////////////////////////////////////////////////////////////////////
+    AudioParameterFloat* mDepthParameter = (AudioParameterFloat*)params.getUnchecked(1);
 
-    mFeedbackSlider.setBounds(100, 0, 100, 100);
+
+    mDepthSlider.setBounds(100, 0, 100, 100);
+    mDepthSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    mDepthSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    mDepthSlider.setRange(mDepthParameter->range.start, mDepthParameter->range.end);
+    mDepthSlider.setValue(*mDepthParameter);
+    addAndMakeVisible(mDepthSlider);
+
+    mDepthSlider.onValueChange = [this, mDepthParameter] { *mDepthParameter = mDepthSlider.getValue(); };
+    mDepthSlider.onDragStart = [mDepthParameter] {mDepthParameter->beginChangeGesture();};
+    mDepthSlider.onDragEnd = [mDepthParameter] {mDepthParameter->endChangeGesture();};
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    AudioParameterFloat* mRateParameter = (AudioParameterFloat*)params.getUnchecked(2);
+
+
+    mRateSlider.setBounds(200, 0, 100, 100);
+    mRateSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    mRateSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    mRateSlider.setRange(mRateParameter->range.start, mRateParameter->range.end);
+    mRateSlider.setValue(*mRateParameter);
+    addAndMakeVisible(mRateSlider);
+
+    mRateSlider.onValueChange = [this, mRateParameter] { *mRateParameter = mRateSlider.getValue(); };
+    mRateSlider.onDragStart = [mRateParameter] {mRateParameter->beginChangeGesture();};
+    mRateSlider.onDragEnd = [mRateParameter] {mRateParameter->endChangeGesture();};
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    AudioParameterFloat* mPhaseOffsetParameter = (AudioParameterFloat*)params.getUnchecked(3);
+
+
+    mPhaseOffsetSlider.setBounds(300, 0, 100, 100);
+    mPhaseOffsetSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    mPhaseOffsetSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    mPhaseOffsetSlider.setRange(dryWetParameter->range.start, dryWetParameter->range.end);
+    mPhaseOffsetSlider.setValue(*dryWetParameter);
+    addAndMakeVisible(mPhaseOffsetSlider);
+
+    mPhaseOffsetSlider.onValueChange = [this, mPhaseOffsetParameter] { *mPhaseOffsetParameter = mPhaseOffsetSlider.getValue(); };
+    mPhaseOffsetSlider.onDragStart = [mPhaseOffsetParameter] {mPhaseOffsetParameter->beginChangeGesture();};
+    mPhaseOffsetSlider.onDragEnd = [mPhaseOffsetParameter] {mPhaseOffsetParameter->endChangeGesture();};
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    AudioParameterFloat* feedbackParameter = (AudioParameterFloat*)params.getUnchecked(4);
+
+    mFeedbackSlider.setBounds(0, 100, 100, 100);
     mFeedbackSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
     mFeedbackSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     mFeedbackSlider.setRange(feedbackParameter->range.start, feedbackParameter->range.end);
@@ -48,9 +95,25 @@ KadenzaPluginDelayAudioProcessorEditor::KadenzaPluginDelayAudioProcessorEditor(K
     mFeedbackSlider.onDragStart = [feedbackParameter] {feedbackParameter->beginChangeGesture();};
     mFeedbackSlider.onDragEnd = [feedbackParameter] {feedbackParameter->endChangeGesture();};
 
-    AudioParameterFloat* delayTimeParameter = (AudioParameterFloat*)params.getUnchecked(2);
+    //////////////////////////////////////////////////////////////////////////////////////
+    AudioParameterInt* typeParameter = (AudioParameterInt*)params.getUnchecked(5);
 
-    /*mDelayTimeSlider.setBounds(200, 0, 100, 100);
+    mType.setBounds(100, 100, 100, 20);
+    mType.addItem("Chorus", 1);
+    mType.addItem("Flanger", 2);
+    addAndMakeVisible(mType);
+
+    mType.onChange  = [this, typeParameter] {
+        typeParameter->beginChangeGesture();
+    *typeParameter = mType.getSelectedItemIndex();
+    typeParameter->endChangeGesture();
+    };
+
+    mType.setSelectedItemIndex(*typeParameter);
+
+    /*AudioParameterFloat* delayTimeParameter = (AudioParameterFloat*)params.getUnchecked(2);
+
+    mDelayTimeSlider.setBounds(200, 0, 100, 100);
     mDelayTimeSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
     mDelayTimeSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     mDelayTimeSlider.setRange(delayTimeParameter->range.start, delayTimeParameter->range.end);
@@ -62,6 +125,8 @@ KadenzaPluginDelayAudioProcessorEditor::KadenzaPluginDelayAudioProcessorEditor(K
     mDelayTimeSlider.onDragEnd = [delayTimeParameter] {delayTimeParameter->endChangeGesture();};*/
 
 }
+
+
 
 KadenzaPluginDelayAudioProcessorEditor::~KadenzaPluginDelayAudioProcessorEditor()
 {

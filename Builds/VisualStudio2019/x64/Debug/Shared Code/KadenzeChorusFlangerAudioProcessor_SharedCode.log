@@ -1,16 +1,7 @@
-﻿  PluginProcessor.cpp
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(43,100): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(125,62): warning C4100: 'index': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(129,67): warning C4100: 'index': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(134,83): warning C4100: 'newName': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(134,62): warning C4100: 'index': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(145,40): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(139,77): warning C4100: 'samplesPerBlock': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(221,70): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(225,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(269,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(200,93): warning C4100: 'midiMessages': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(323,73): warning C4100: 'destData': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(330,82): warning C4100: 'sizeInBytes': unreferenced formal parameter
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginProcessor.cpp(330,72): warning C4100: 'data': unreferenced formal parameter
+﻿  PluginEditor.cpp
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(34,102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(49,100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(64,96): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(79,124): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(94,110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   KadenzeChorusFlangerAudioProcessor_SharedCode.vcxproj -> C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Builds\VisualStudio2019\x64\Debug\Shared Code\KadenzeChorusFlangerAudioProcessor.lib
