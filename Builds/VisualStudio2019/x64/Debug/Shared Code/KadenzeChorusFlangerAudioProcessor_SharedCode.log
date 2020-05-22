@@ -1,7 +1,4 @@
 ﻿  PluginEditor.cpp
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(40,102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(60,124): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(81,100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(102,96): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(126,110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(75,85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Source\PluginEditor.cpp(61,11): warning C4189: 'params': local variable is initialized but not referenced
   KadenzeChorusFlangerAudioProcessor_SharedCode.vcxproj -> C:\Users\lars\OneDrive - Aalborg Universitet\Programmering\C++\JUCE projekter\KadenzeChorusFlangerAudioProcessor\Builds\VisualStudio2019\x64\Debug\Shared Code\KadenzeChorusFlangerAudioProcessor.lib

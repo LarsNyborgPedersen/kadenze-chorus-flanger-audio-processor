@@ -25,6 +25,7 @@ public:
     //==============================================================================
     void paint(Graphics&) override;
     void resized() override;
+    void createUI(AudioParameterFloat* parameter, Slider& slider, Label& label, String labelText, int x, int y);
 
 private:
     // This reference is provided as a quick way for your editor to
