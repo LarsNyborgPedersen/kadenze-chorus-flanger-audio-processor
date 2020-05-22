@@ -38,6 +38,12 @@ private:
     Slider mPhaseOffsetSlider;
     Slider mFeedbackSlider;
 
+    Label mDryWetLabel;
+    Label mDepthLabel;
+    Label mRateLabel;
+    Label mPhaseOffsetLabel;
+    Label mFeedbackLabel;
+
     ComboBox mType;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KadenzaPluginDelayAudioProcessorEditor)

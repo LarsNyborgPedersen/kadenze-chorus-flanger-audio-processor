@@ -67,10 +67,9 @@ private:
     
     
     
-    float mLFOPhase;
     
 
-
+    //Parameter declarations
     AudioParameterFloat* mDryWetParameter;
     AudioParameterFloat* mDepthParameter;
     AudioParameterFloat* mRateParameter;
@@ -78,13 +77,21 @@ private:
     AudioParameterFloat* mFeedbackParameter;
     AudioParameterInt* mTypeParameter;
 
+    
+
+
+    //Circular buffer declarations
+    float* mCircularBufferLeft;
+    float* mCircularBufferRight;
+    int mCircularBufferWriteHead;
+    int mCircularBufferLenght;
+    
+    //
     float mFeedbackLeft;
     float mFeedbackRight;
 
-    int mCircularBufferWriteHead;
-    int mCircularBufferLenght;
-    float* mCircularBufferLeft;
-    float* mCircularBufferRight;
+    //LFO declaration
+    float mLFOPhase;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KadenzaPluginDelayAudioProcessor)
 };

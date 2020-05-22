@@ -35,7 +35,7 @@ KadenzaPluginDelayAudioProcessor::KadenzaPluginDelayAudioProcessor()
 
 
 
-
+    //Construct and add our parameters
     addParameter(mDryWetParameter = new AudioParameterFloat("drywet", "Dry Wet", 0.0, 1.0, 0.5));
     addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0.0, 1.0, 0.5));
     addParameter(mRateParameter = new AudioParameterFloat("rate", "Rate", 0.1f, 20.f, 10.f));
@@ -43,7 +43,7 @@ KadenzaPluginDelayAudioProcessor::KadenzaPluginDelayAudioProcessor()
     addParameter(mFeedbackParameter = new AudioParameterFloat("feedback", "Feedback", 0.0, 0.98, 0.5));
     addParameter(mTypeParameter = new AudioParameterInt("type", "Type", 0, 1, 0));
 
-
+    // Initialize data to default values
     mCircularBufferLeft = nullptr;
     mCircularBufferRight = nullptr;
     mCircularBufferWriteHead = 0;
@@ -137,26 +137,33 @@ void KadenzaPluginDelayAudioProcessor::changeProgramName(int index, const String
 //==============================================================================
 void KadenzaPluginDelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+    //Initialize our data for the current sample rate and reset things such as phase and writeheads
+
+    //Initialize the phase
     mLFOPhase = 0;
 
-    //2 is the amount of seconds
+    //Calculate the circular buffer lenght
     mCircularBufferLenght = sampleRate * 2;
 
-
+    //Initialize the left buffer
     if (mCircularBufferLeft == nullptr)
     {
         mCircularBufferLeft = new float[mCircularBufferLenght];
     }
 
+    //Clear any junk data
     zeromem(mCircularBufferLeft, mCircularBufferLenght * sizeof(float));
 
+    //Init the right buffer
     if (mCircularBufferRight == nullptr)
     {
         mCircularBufferRight = new float[mCircularBufferLenght];
     }
 
+    //Clear any junk data
     zeromem(mCircularBufferRight, mCircularBufferLenght * sizeof(float));
 
+    //Init the writehead to 0
     mCircularBufferWriteHead = 0;
 
 
@@ -206,7 +213,7 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
         buffer.clear(i, 0, buffer.getNumSamples());
 
 
-
+    //Obtain the left and right data pointers
     float* leftChannel = buffer.getWritePointer(0);
     float* rightChannel = buffer.getWritePointer(1);
 
@@ -214,26 +221,45 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
 
     std::cout << "This is printed to console";
 
+    //Iterate through samples in buffer
     for (int i = 0; i < buffer.getNumSamples(); i++)
     {
+
+        //Write into our circular buffer
+        mCircularBufferLeft[mCircularBufferWriteHead] = leftChannel[i] + mFeedbackLeft;
+        mCircularBufferRight[mCircularBufferWriteHead] = rightChannel[i] + mFeedbackRight;
+
+
         float M_PI = 3.1415926535897932384626433832795028841971693993;
 
+        //Generate the left LFO output
         float lfoOutLeft = sin(2 * M_PI * mLFOPhase);
 
+        //Calculate the right channel LFO phase
         float lfoPhaseRight = mLFOPhase + *mPhaseOffsetParameter;
 
         if (lfoPhaseRight > 1) {
             lfoPhaseRight -= 1;
         } 
 
-        
+        //Generate the right channel lfo output
         float lfoOutRight = sin(2 * M_PI * lfoPhaseRight);
 
+        //Moving our LFO phase forward
+        mLFOPhase += *mRateParameter / getSampleRate();
+
+        if (mLFOPhase > 1) {
+            mLFOPhase -= 1;
+        }
+
+        //Control the lfo depth
         lfoOutLeft *= *mDepthParameter;
         lfoOutRight *= *mDepthParameter;
 
         float lfoOutMappedLeft = 0;
         float lfoOutMappedRight = 0;
+
+        //Map lfo output to our desired delay times
 
         //Chorus
         if (*mTypeParameter == 0) {
@@ -247,18 +273,11 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
         }
 
 
-
+        //Calculate the delay lenghts in samples
         float delayTimeSamplesLeft = getSampleRate() * lfoOutMappedLeft;
-
-
         float delayTimeSamplesRight = getSampleRate() * lfoOutMappedRight;
 
-
-        mLFOPhase += *mRateParameter / getSampleRate();
-
-        if (mLFOPhase > 1) {
-            mLFOPhase -= 1;
-        }
+        
 
 
 
@@ -296,22 +315,20 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
 
         //Not sure if it should be mRateParameter or not...
 
-
-        mCircularBufferLeft[mCircularBufferWriteHead] = leftChannel[i] + mFeedbackLeft;
-        mCircularBufferRight[mCircularBufferWriteHead] = rightChannel[i] + mFeedbackRight;
-
+        //Calculate the left read head position
         float DelayReadHeadLeft = mCircularBufferWriteHead - delayTimeSamplesLeft;
         if (DelayReadHeadLeft < 0) {
             DelayReadHeadLeft += mCircularBufferLenght;
         }
 
 
+        //Calculate the right read head position
         float DelayReadHeadRight = mCircularBufferWriteHead - delayTimeSamplesRight;
         if (DelayReadHeadRight < 0) {
             DelayReadHeadRight += mCircularBufferLenght;
         }
 
-
+        //Calculate linear interpolation points for left channel
         int readHeadLeft_x = (int)DelayReadHeadLeft;
         int readHeadLeft_x1 = (int)DelayReadHeadLeft + 1;
         float readheadFloatLeft = DelayReadHeadLeft - readHeadLeft_x;
@@ -321,6 +338,7 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
             readHeadLeft_x1 -= mCircularBufferLenght;
         }
 
+        //Calculate linear interpolation points for right channel
         int readHeadRight_x = (int)DelayReadHeadRight;
         int readHeadRight_x1 = (int)DelayReadHeadRight + 1;
         float readheadFloatRight = DelayReadHeadRight - readHeadRight_x;
@@ -330,24 +348,29 @@ void KadenzaPluginDelayAudioProcessor::processBlock(AudioBuffer<float>& buffer, 
             readHeadRight_x1 -= mCircularBufferLenght;
         }
 
-
+        //Generate the output samples
         float delay_sample_left = lin_interp(mCircularBufferLeft[readHeadLeft_x], mCircularBufferLeft[readHeadLeft_x1], readheadFloatLeft);
         float delay_sample_right = lin_interp(mCircularBufferRight[readHeadRight_x], mCircularBufferRight[readHeadRight_x1], readheadFloatRight);
 
         mFeedbackLeft = delay_sample_left * *mFeedbackParameter;
         mFeedbackRight = delay_sample_right * *mFeedbackParameter;
 
+        
+        
         mCircularBufferWriteHead++;
-
-        buffer.setSample(0, i, buffer.getSample(0, i) * (1 - *mDryWetParameter) + delay_sample_left * *mDryWetParameter);
-        buffer.setSample(1, i, buffer.getSample(1, i) * (1 - *mDryWetParameter) + delay_sample_right * *mDryWetParameter);
-
 
 
         if (mCircularBufferWriteHead > mCircularBufferLenght)
         {
             mCircularBufferWriteHead = 0;
         }
+
+        float dryAmount = 1 - *mDryWetParameter;
+        float wetAmount = *mDryWetParameter;
+
+        buffer.setSample(0, i, buffer.getSample(0, i)* dryAmount + delay_sample_left * wetAmount);
+        buffer.setSample(1, i, buffer.getSample(1, i)* dryAmount + delay_sample_right * wetAmount);
+
     }
 }
 
@@ -379,7 +402,7 @@ void KadenzaPluginDelayAudioProcessor::getStateInformation(MemoryBlock& destData
 
 void KadenzaPluginDelayAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
-    std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes);
+    std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
 
     if (xml.get() != nullptr && xml->hasTagName("FlangerChorus")) {
         *mDryWetParameter = xml->getDoubleAttribute("DryWet");
